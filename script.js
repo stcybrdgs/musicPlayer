@@ -43,6 +43,7 @@ const songs = [
 
 // Play
 function playSong() {
+  console.log('play')
   isPlaying = true
   playBtn.classList.replace('fa-play', 'fa-pause')
   playBtn.setAttribute('title', 'Pause')
@@ -50,6 +51,7 @@ function playSong() {
 }
 
 function pauseSong() {
+  console.log('pause')
   isPlaying = false
   playBtn.classList.replace('fa-pause', 'fa-play')
   playBtn.setAttribute('title', 'Play')
@@ -78,6 +80,7 @@ function loadSong(song) {
   artist.textContent = song.artist
   music.src = `music/${song.name}.mp3`
   image.src = `images/${song.name}.jpeg`
+  progress.style.width = `0%`
 }
 
 // Update progress bar and times
@@ -127,7 +130,9 @@ function handleSongEnd() {
 }
 
 // Listeners
-playBtn.addEventListener('click', isPlaying ? pauseSong : playSong)
+playBtn.addEventListener('click', () => {
+  isPlaying ? pauseSong() : playSong()
+})
 prevBtn.addEventListener('click', prevSong)
 nextBtn.addEventListener('click', nextSong)
 music.addEventListener('timeupdate', updateSongProgress)
